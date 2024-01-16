@@ -7,8 +7,10 @@ const Header = () => {
     <header className=" border-2 py-4 px-6">
       <section className="flex justify-between items-center">
         <div className="flex items-center flex-none">
-          <Link to="/" className="font-extrabold text-4xl mx-6 ">
+          <Link to="/">
             <img className="w-12" src={cart} alt="" />
+          </Link>
+          <Link to="/" className="font-extrabold text-4xl mx-6 ">
             Shopmate
           </Link>
         </div>
