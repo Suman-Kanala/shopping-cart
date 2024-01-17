@@ -1,4 +1,21 @@
-const Card = ({ img, price, name, id }) => {
+import { useEffect, useState } from "react";
+import { UseCart } from "../Context/CartContext";
+
+const Card = ({ product }) => {
+  const { img, price, name, id } = product;
+  const { addToCart, cartList, remove } = UseCart();
+  const [isInCart, setIsInCart] = useState(false);
+  // console.log(cartList);
+
+  useEffect(() => {
+    const productIsInCart = cartList.find((cartItem) => cartItem.id === id);
+
+    if (productIsInCart) {
+      setIsInCart(true);
+    } else {
+      setIsInCart(false);
+    }
+  }, [cartList, id]);
   return (
     <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
       <a href="#">
@@ -10,12 +27,23 @@ const Card = ({ img, price, name, id }) => {
         </a>
         <div className="flex justify-between">
           <p>$ {price}</p>
-          <button
-            type="button"
-            className="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 py-2 px-4 rounded-lg hover:stroke-lime-300"
-          >
-            Add to cart
-          </button>
+          {isInCart ? (
+            <button
+              onClick={() => remove(product)}
+              type="button"
+              className="text-gray-900 bg-red-500 py-2 px-4 rounded-lg text-white"
+            >
+              Remove
+            </button>
+          ) : (
+            <button
+              onClick={() => addToCart(product)}
+              type="button"
+              className="text-gray-900 bg-gradient-to-r from-lime-200 via-lime-400 to-lime-500 py-2 px-4 rounded-lg hover:stroke-lime-300"
+            >
+              Add to cart
+            </button>
+          )}
         </div>
       </div>
     </div>

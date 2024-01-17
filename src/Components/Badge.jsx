@@ -1,5 +1,7 @@
 import { IoCartOutline } from "react-icons/io5";
+import { UseCart } from "../Context/CartContext";
 const Badge = () => {
+  const { pro } = UseCart();
   return (
     <div>
       <button
@@ -9,7 +11,7 @@ const Badge = () => {
         <IoCartOutline />
 
         <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">
-          0
+          {pro}
         </div>
       </button>
     </div>
